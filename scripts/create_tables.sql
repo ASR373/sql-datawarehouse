@@ -1,17 +1,19 @@
 /*
 =============================================================
-Create Tables Procedure in Bronze Schema
+Create Tables Procedure in Bronze Schema (With Timing)
 =============================================================
 Script Purpose:
-    Creates a procedure that drops and recreates all bronze tables.
-    This is useful for refreshing the staging layer.
+    Drops and recreates all bronze tables with timing logs
+    for start and end of each table creation.
 =============================================================
 */
 
--- Create the procedure inside the bronze schema
 CREATE OR REPLACE PROCEDURE bronze.create_all_bronze_tables()
 LANGUAGE plpgsql
 AS $$
+DECLARE
+    start_time TIMESTAMP;
+    end_time TIMESTAMP;
 BEGIN
     RAISE NOTICE '🧹 Dropping existing bronze tables...';
 
@@ -22,7 +24,9 @@ BEGIN
     EXECUTE 'DROP TABLE IF EXISTS bronze.erp_loc_a101 CASCADE';
     EXECUTE 'DROP TABLE IF EXISTS bronze.erp_px_cat_g1v2 CASCADE';
 
+    -- crm_cust_info
     RAISE NOTICE '📦 Creating table: bronze.crm_cust_info';
+    start_time := clock_timestamp();
     EXECUTE '
         CREATE TABLE bronze.crm_cust_info (
             cst_id INT,
@@ -33,8 +37,12 @@ BEGIN
             cst_gndr VARCHAR(10),
             cst_create_date DATE
         )';
+    end_time := clock_timestamp();
+    RAISE NOTICE '⏱️  Time taken: %.3f seconds', EXTRACT(EPOCH FROM end_time - start_time);
 
+    -- crm_prd_info
     RAISE NOTICE '📦 Creating table: bronze.crm_prd_info';
+    start_time := clock_timestamp();
     EXECUTE '
         CREATE TABLE bronze.crm_prd_info (
             prd_id INT,
@@ -45,8 +53,12 @@ BEGIN
             prd_start_dt DATE,
             prd_end_dt DATE
         )';
+    end_time := clock_timestamp();
+    RAISE NOTICE '⏱️  Time taken: %.3f seconds', EXTRACT(EPOCH FROM end_time - start_time);
 
+    -- crm_sales_details
     RAISE NOTICE '📦 Creating table: bronze.crm_sales_details';
+    start_time := clock_timestamp();
     EXECUTE '
         CREATE TABLE bronze.crm_sales_details (
             sls_ord_num VARCHAR(50),
@@ -59,23 +71,35 @@ BEGIN
             sls_quantity INT,
             sls_price INT
         )';
+    end_time := clock_timestamp();
+    RAISE NOTICE '⏱️  Time taken: %.3f seconds', EXTRACT(EPOCH FROM end_time - start_time);
 
+    -- erp_cust_az12
     RAISE NOTICE '📦 Creating table: bronze.erp_cust_az12';
+    start_time := clock_timestamp();
     EXECUTE '
         CREATE TABLE bronze.erp_cust_az12 (
             CID VARCHAR(50),
             BDATE DATE,
             GEN VARCHAR(20)
         )';
+    end_time := clock_timestamp();
+    RAISE NOTICE '⏱️  Time taken: %.3f seconds', EXTRACT(EPOCH FROM end_time - start_time);
 
+    -- erp_loc_a101
     RAISE NOTICE '📦 Creating table: bronze.erp_loc_a101';
+    start_time := clock_timestamp();
     EXECUTE '
         CREATE TABLE bronze.erp_loc_a101 (
             CID VARCHAR(50),
             CNTRY VARCHAR(50)
         )';
+    end_time := clock_timestamp();
+    RAISE NOTICE '⏱️  Time taken: %.3f seconds', EXTRACT(EPOCH FROM end_time - start_time);
 
+    -- erp_px_cat_g1v2
     RAISE NOTICE '📦 Creating table: bronze.erp_px_cat_g1v2';
+    start_time := clock_timestamp();
     EXECUTE '
         CREATE TABLE bronze.erp_px_cat_g1v2 (
             ID VARCHAR(50),
@@ -83,6 +107,8 @@ BEGIN
             SUBCAT VARCHAR(50),
             MAINTENANCE VARCHAR(50)
         )';
+    end_time := clock_timestamp();
+    RAISE NOTICE '⏱️  Time taken: %.3f seconds', EXTRACT(EPOCH FROM end_time - start_time);
 
     RAISE NOTICE '✅ All bronze tables created successfully.';
 END;
