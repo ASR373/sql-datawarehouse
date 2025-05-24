@@ -13,7 +13,8 @@ CREATE OR REPLACE PROCEDURE bronze.create_all_bronze_tables()
 LANGUAGE plpgsql
 AS $$
 BEGIN
-    -- Drop existing tables if they exist
+    RAISE NOTICE '🧹 Dropping existing bronze tables...';
+
     EXECUTE 'DROP TABLE IF EXISTS bronze.crm_cust_info CASCADE';
     EXECUTE 'DROP TABLE IF EXISTS bronze.crm_prd_info CASCADE';
     EXECUTE 'DROP TABLE IF EXISTS bronze.crm_sales_details CASCADE';
@@ -21,7 +22,7 @@ BEGIN
     EXECUTE 'DROP TABLE IF EXISTS bronze.erp_loc_a101 CASCADE';
     EXECUTE 'DROP TABLE IF EXISTS bronze.erp_px_cat_g1v2 CASCADE';
 
-    -- Recreate all tables
+    RAISE NOTICE '📦 Creating table: bronze.crm_cust_info';
     EXECUTE '
         CREATE TABLE bronze.crm_cust_info (
             cst_id INT,
@@ -33,6 +34,7 @@ BEGIN
             cst_create_date DATE
         )';
 
+    RAISE NOTICE '📦 Creating table: bronze.crm_prd_info';
     EXECUTE '
         CREATE TABLE bronze.crm_prd_info (
             prd_id INT,
@@ -44,6 +46,7 @@ BEGIN
             prd_end_dt DATE
         )';
 
+    RAISE NOTICE '📦 Creating table: bronze.crm_sales_details';
     EXECUTE '
         CREATE TABLE bronze.crm_sales_details (
             sls_ord_num VARCHAR(50),
@@ -57,6 +60,7 @@ BEGIN
             sls_price INT
         )';
 
+    RAISE NOTICE '📦 Creating table: bronze.erp_cust_az12';
     EXECUTE '
         CREATE TABLE bronze.erp_cust_az12 (
             CID VARCHAR(50),
@@ -64,12 +68,14 @@ BEGIN
             GEN VARCHAR(20)
         )';
 
+    RAISE NOTICE '📦 Creating table: bronze.erp_loc_a101';
     EXECUTE '
         CREATE TABLE bronze.erp_loc_a101 (
             CID VARCHAR(50),
             CNTRY VARCHAR(50)
         )';
 
+    RAISE NOTICE '📦 Creating table: bronze.erp_px_cat_g1v2';
     EXECUTE '
         CREATE TABLE bronze.erp_px_cat_g1v2 (
             ID VARCHAR(50),
@@ -77,5 +83,7 @@ BEGIN
             SUBCAT VARCHAR(50),
             MAINTENANCE VARCHAR(50)
         )';
+
+    RAISE NOTICE '✅ All bronze tables created successfully.';
 END;
 $$;
