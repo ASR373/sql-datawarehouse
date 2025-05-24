@@ -24,17 +24,17 @@ files_to_load = [
     {
         "file": "Datasets/source_erp/PX_CAT_G1V2.csv",
         "table": "bronze.erp_px_cat_g1v2",
-        "columns": ("ID", "CAT", "SUBCAT", "MAINTENANCE")
+        "columns": ("id", "cat", "subcat", "maintenance")
     },
     {
         "file": "Datasets/source_erp/LOC_A101.csv",
         "table": "bronze.erp_loc_a101",
-        "columns": ("CID", "CNTRY")
+        "columns": ("cid", "cntry")
     },
     {
         "file": "Datasets/source_erp/CUST_AZ12.csv",
         "table": "bronze.erp_cust_az12",
-        "columns": ("CID", "BDATE", "GEN")
+        "columns": ("cid", "bdate", "gen")
     },
     {
         "file": "Datasets/source_crm/CRM_CUST_INFO.csv",
@@ -52,6 +52,7 @@ files_to_load = [
         "columns": ("sls_ord_num", "sls_prd_key", "sls_cust_id", "sls_order_dt", "sls_ship_dt", "sls_due_dt", "sls_sales", "sls_quantity", "sls_price")
     }
 ]
+
 
 for item in files_to_load:
     print(f"📥 Loading {item['file']} into {item['table']}...")
