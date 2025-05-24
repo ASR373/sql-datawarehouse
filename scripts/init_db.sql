@@ -1,13 +1,17 @@
-DO $$
-BEGIN
-   IF EXISTS (SELECT 1 FROM pg_database WHERE datname = 'datawarehouse') THEN
-      -- Terminate all connections to the database
-      REVOKE CONNECT ON DATABASE datawarehouse FROM public;
-      EXECUTE format('SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE datname = %L;', 'datawarehouse');
-      -- Drop the database
-      EXECUTE 'DROP DATABASE datawarehouse';
-   END IF;
-END$$;
+/*
+=============================================================
+Create Database and Schemas
+=============================================================
+Script Purpose:
+    This script creates a new database named 'DataWarehouse'.
+    Additionally, the script sets up three schemas 
+    within the database: 'bronze', 'silver', and 'gold'.
+	
+WARNING:
+    Running this script will drop the entire 'DataWarehouse' database if it exists. 
+    All data in the database will be permanently deleted. Proceed with caution 
+    and ensure you have proper backups before running this script.
+*/
 
 -- Create the 'datawarehouse' database
 CREATE DATABASE datawarehouse;
