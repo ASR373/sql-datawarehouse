@@ -8,7 +8,7 @@ Script Purpose:
 =============================================================
 */
 
-CREATE OR REPLACE PROCEDURE bronze.create_all_bronze_tables()
+CREATE OR REPLACE PROCEDURE bronze.load_bronze()
 LANGUAGE plpgsql
 AS $$
 DECLARE
