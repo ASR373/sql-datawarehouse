@@ -14,11 +14,10 @@
 6. [Setup Instructions](#setup-instructions)  
    - [Requirements](#requirements)  
    - [Setup Steps](#setup-steps)  
-7. [Data Testing & Validation](#data-testing--validation)  
-8. [Project Learnings](#project-learnings)  
-9. [Contributing](#contributing)  
-10. [License](#license)  
-11. [Contact](#contact)  
+7. [Project Learnings](#project-learnings)  
+8. [Contributing](#contributing)  
+9. [License](#license)  
+10. [Contact](#contact)  
 
 ---
 
@@ -56,8 +55,8 @@ sql-datawarehouse/
 │   ├── 04_transformations.sql  # Silver & Gold transformation logic
 │   └── 05_data_quality_checks.sql  # Data validation SQL
 ├── tests/                      
-│   ├── test_data_quality.sql   # Checks nulls, FK constraints
-│   └── test_transformations.sql  # Verifies transformation outputs
+│   ├── quality_check_silver.sql
+│   └── quality_check_gold.sql  
 ├── run_setup.sh                # Automates the full pipeline
 └── README.md                   # Project documentation (this file)
 ```
@@ -180,26 +179,6 @@ This will:
 - Create all necessary tables  
 - Load raw data into the Bronze layer  
 - Run transformation SQL for Silver & Gold layers  
-
----
-
-## 🧪 Data Testing & Validation
-
-Test cases ensure correctness and consistency of the data warehouse.
-
-| File                     | Check Type                                  |
-|--------------------------|---------------------------------------------|
-| `tests/test_data_quality.sql`       | Not-null, referential integrity, data types |
-| `tests/test_transformations.sql`    | Correctness of joins, calculated fields, summaries |
-
-Run tests using:
-
-```bash
-psql -f tests/test_data_quality.sql
-psql -f tests/test_transformations.sql
-```
-
-Or via GUI tools like **pgAdmin** or **DBeaver**.
 
 ---
 
