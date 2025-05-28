@@ -191,26 +191,8 @@ This will:
 
 ---
 
-## 🤝 Contributing
-
-We welcome PRs and ideas!
-
-```bash
-# Steps to contribute:
-1. Fork the repo
-2. Create a feature branch
-3. Commit and push changes
-4. Open a Pull Request
-```
-
----
-
 ## 📄 License
 
 This project is licensed under the [MIT License](LICENSE).
 
 ---
-
-## 📬 Contact
-
-For suggestions or collaboration, please open an [issue](https://github.com/ASR373/sql-datawarehouse/issues).
