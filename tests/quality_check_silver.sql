@@ -1,6 +1,6 @@
 /*
 ===============================================================================
-Quality Checks (PostgreSQL version, lowercase)
+Quality Checks 
 ===============================================================================
 Script Purpose:
     This script performs various quality checks for data consistency, accuracy, 
