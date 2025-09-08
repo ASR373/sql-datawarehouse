@@ -13,7 +13,7 @@
 5. [Data Integration (Table Relationships)](#data-integration-table-relationships)  
 6. [Setup Instructions](#setup-instructions)  
    - [Requirements](#requirements)  
-   - [Setup Steps](#setup-steps)  
+   - [Setup Steps](#setup-steps) 
 7. [Project Learnings](#project-learnings)  
 8. [Contributing](#contributing)  
 9. [License](#license)  
