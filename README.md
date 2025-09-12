@@ -16,7 +16,7 @@
    - [Setup Steps](#setup-steps) 
 7. [Project Learnings](#project-learnings)  
 8. [Contributing](#contributing)  
-9. [License](#license)  
+9. [License](#license) 
 10. [Contact](#contact)  
 
 ---
