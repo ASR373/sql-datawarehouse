@@ -28,7 +28,7 @@ This project implements a full-featured **SQL-based Data Warehouse** using **Pos
 - Schema standardization  
 - Data transformation logic  
 - Layered warehousing  
-- Business-readiness of data  
+- Business-readiness of data
 
 ---
 
