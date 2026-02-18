@@ -1,4 +1,3 @@
-
 # 📦 SQL Data Warehouse Project
 
 ## 📑 Table of Contents
